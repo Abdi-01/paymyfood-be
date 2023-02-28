@@ -18,11 +18,15 @@ module.exports = (sequelize, DataTypes) => {
             image: DataTypes.STRING,
             price: DataTypes.INTEGER,
             categoryId: DataTypes.INTEGER,
+            isDeleted: DataTypes.BOOLEAN,
         },
         {
             sequelize,
             modelName: "product",
         }
     );
+    product.associate = (models) => {
+        product.belongsTo(models.category, {foreignKey: 'categoryId'});
+    }
     return product;
 };

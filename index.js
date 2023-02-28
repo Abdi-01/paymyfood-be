@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
 // #destination file storage(image/pdf/document)
-app.use("/", express.static(__dirname + "/public"));
+app.use("/", express.static(__dirname + "/src/public"));
 
 // DB Check Connection
 
@@ -20,7 +20,11 @@ app.get("/", (req, res) => {
 
 // Routing Config
 const userRouter = require("./src/routers/userRouter");
+const productRouter = require("./src/routers/productRouter");
+const categoryRouter = require("./src/routers/categoryRouter");
 app.use("/user", userRouter);
+app.use("/product", productRouter);
+app.use("/category", categoryRouter);
 
 // Error Handling
 app.use((err, req, res, next) => {
