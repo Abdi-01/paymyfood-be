@@ -14,10 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   category.init({
-    category: DataTypes.STRING
+    category: DataTypes.STRING,
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'category',
   });
+  category.associate = (models) => {
+    category.hasMany(models.product, {foreignKey: 'categoryId'});
+  }
   return category;
 };

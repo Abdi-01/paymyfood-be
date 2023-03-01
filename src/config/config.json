@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "learning",
-    "password": "vijihuka3",
-    "database": "paymyfood",
+    "username": "daniel",
+    "password": "1234567890",
+    "database": "test_pmf",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
