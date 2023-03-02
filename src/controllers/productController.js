@@ -71,7 +71,7 @@ module.exports = {
                 if (fs.existsSync(`./src/public${get[0].dataValues.image}`) && !get[0].dataValues.image.includes('default')) {
                     fs.unlinkSync(`./src/public${get[0].dataValues.image}`);
                 }
-                
+
             }
             return res.status(200).send({
                 success: true,
@@ -83,7 +83,7 @@ module.exports = {
             next(error)
         }
     },
-    addProduct: async (req,res,next) => {
+    addProduct: async (req, res, next) => {
         try {
             console.log("req.body.data : ", req.body.data);
             console.log("req.files  : ", req.files);
@@ -113,6 +113,45 @@ module.exports = {
                 message: 'Add Product success'
             })
 
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    },
+    list: async (req, res, next) => {
+        try {
+            let { page, size, name, sortby, order, category } = req.query;
+            if (!page) {
+                page = 0;
+            }
+            if (!size) {
+                size = 6;
+            }
+            if (!sortby) {
+                sortby = 'product'
+            }
+            if (!order) {
+                order = 'ASC'
+            }
+
+            let get = await model.product.findAndCountAll({
+                offset: parseInt(page * size),
+                limit: parseInt(size),
+                where: { product: { [sequelize.Op.like]: `%${name}%` } },
+                include: [
+                    {
+                        model: model.category, attributes: ['category'], where: {
+                            category: { [sequelize.Op.like]: `%${category}%` }
+                        }
+                    }
+                ],
+                order: [[sortby, order]]
+            })
+            return res.status(200).send({
+                data: get.rows,
+                totalPages: Math.ceil(get.count / size),
+                datanum: get.count,
+            })
         } catch (error) {
             console.log(error);
             next(error)
