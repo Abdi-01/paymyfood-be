@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   table.init({
-    table: DataTypes.INTEGER
+    table: DataTypes.INTEGER,
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'table',

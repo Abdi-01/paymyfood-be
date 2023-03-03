@@ -7,7 +7,8 @@ const uploader = require("../helper/uploader");
 
 route.get('/getalltable', tableController.getAllTable)
 route.patch('/edittable', tableController.editTable)
-route.get('/deletetable', tableController.deleteTable)
+route.patch('/deletetable', tableController.deleteTable)
+route.post('/addtable', tableController.addTable)
 
 
 module.exports = route;
