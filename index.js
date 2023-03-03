@@ -22,9 +22,11 @@ app.get("/", (req, res) => {
 const userRouter = require("./src/routers/userRouter");
 const productRouter = require("./src/routers/productRouter");
 const categoryRouter = require("./src/routers/categoryRouter");
+const tableRouter = require("./src/routers/tableRouter");
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/category", categoryRouter);
+app.use("/table", tableRouter);
 
 // Error Handling
 app.use((err, req, res, next) => {
