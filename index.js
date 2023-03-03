@@ -23,10 +23,12 @@ const userRouter = require("./src/routers/userRouter");
 const productRouter = require("./src/routers/productRouter");
 const categoryRouter = require("./src/routers/categoryRouter");
 const tableRouter = require("./src/routers/tableRouter");
+const transactionRouter = require("./src/routers/transactionRouter");
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/category", categoryRouter);
 app.use("/table", tableRouter);
+app.use("/transaction", transactionRouter);
 
 // Error Handling
 app.use((err, req, res, next) => {

@@ -20,5 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'table',
   });
+  table.associate = (models) => {
+    table.hasMany(models.transaction, {foreignKey: 'tableId'});
+  }
   return table;
 };
