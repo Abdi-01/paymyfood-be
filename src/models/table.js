@@ -14,10 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   table.init({
-    table: DataTypes.INTEGER
+    table: DataTypes.INTEGER,
+    isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'table',
   });
+  table.associate = (models) => {
+    table.hasMany(models.transaction, {foreignKey: 'tableId'});
+  }
   return table;
 };

@@ -19,5 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'role',
   });
+
+  role.associate = (models) => {
+    role.hasMany(models.users, {foreignKey: 'roleId'});
+  }
   return role;
 };
