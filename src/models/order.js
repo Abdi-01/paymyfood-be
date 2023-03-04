@@ -17,14 +17,21 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     transactionId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER
+    productId: DataTypes.INTEGER,
+    createdAt: {
+      type: DataTypes.DATEONLY,
+      defaultValue: sequelize.NOW,
+      get() {
+        return new Date(this.getDataValue('createdAt')).toISOString().substring(0, 10);
+      }
+    }
   }, {
     sequelize,
     modelName: 'order',
   });
 
   order.associate = (models) => {
-    order.belongsTo(models.transaction, {foreignKey: 'transactionId'});
+    order.belongsTo(models.transaction, { foreignKey: 'transactionId' });
   }
   return order;
 };
