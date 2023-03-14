@@ -5,6 +5,7 @@ const { checkUser } = require("../helper/validator");
 const uploader = require("../helper/uploader");
 
 route.get('/income', orderController.getIncomeToday)
+route.get('/chart', orderController.chart)
 
 
 module.exports = route
