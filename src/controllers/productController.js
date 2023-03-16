@@ -156,5 +156,25 @@ module.exports = {
             console.log(error);
             next(error)
         }
+    },
+    bestSeller: async (req, res, next) => {
+        try {
+            const result = await model.order.findAll({
+                attributes: [
+                    'productId',
+                    [sequelize.fn('SUM', sequelize.col('quantity')), 'total']
+                ],
+                group: ['productId'],
+                order: [[sequelize.literal('total'), 'DESC']],
+                limit: 5,
+                include: [{
+                    model: model.product, attributes: ['product', 'image']
+                }]
+            });
+            res.status(200).send(result)
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
     }
 }
